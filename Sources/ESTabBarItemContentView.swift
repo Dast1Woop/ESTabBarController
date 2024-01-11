@@ -150,6 +150,7 @@ open class ESTabBarItemContentView: UIView {
         titleLabel.backgroundColor = .clear
         titleLabel.textColor = .clear
         titleLabel.textAlignment = .center
+        titleLabel.numberOfLines = 0
         return titleLabel
     }()
     
@@ -251,23 +252,34 @@ open class ESTabBarItemContentView: UIView {
             
             if !imageView.isHidden && !titleLabel.isHidden {
                 titleLabel.font = UIFont.systemFont(ofSize: f)
-                titleLabel.sizeToFit()
+//                titleLabel.sizeToFit()
                 if #available(iOS 11.0, *), isWide {
-                    titleLabel.frame = CGRect.init(x: (w - titleLabel.bounds.size.width) / 2.0 + (UIScreen.main.scale == 3.0 ? 14.25 : 12.25) + titlePositionAdjustment.horizontal,
-                                                   y: (h - titleLabel.bounds.size.height) / 2.0 + titlePositionAdjustment.vertical,
-                                                   width: titleLabel.bounds.size.width,
-                                                   height: titleLabel.bounds.size.height)
+//                    titleLabel.frame = CGRect.init(x: (w - titleLabel.bounds.size.width) / 2.0 + (UIScreen.main.scale == 3.0 ? 14.25 : 12.25) + titlePositionAdjustment.horizontal,
+//                                                   y: (h - titleLabel.bounds.size.height) / 2.0 + titlePositionAdjustment.vertical,
+//                                                   width: titleLabel.bounds.size.width,
+//                                                   height: titleLabel.bounds.size.height)
+                    titleLabel.frame = CGRect.init(x: 0 + (UIScreen.main.scale == 3.0 ? 14.25 : 12.25) + titlePositionAdjustment.horizontal,
+                                                   y: 0 + titlePositionAdjustment.vertical,
+                                                   width: w-s,
+                                                   height: h-s)
                     imageView.frame = CGRect.init(x: titleLabel.frame.origin.x - s - (UIScreen.main.scale == 3.0 ? 6.0 : 5.0),
                                                   y: (h - s) / 2.0,
                                                   width: s,
                                                   height: s)
                 } else {
-                    titleLabel.frame = CGRect.init(x: (w - titleLabel.bounds.size.width) / 2.0 + titlePositionAdjustment.horizontal,
-                                                   y: h - titleLabel.bounds.size.height - 1.0 + titlePositionAdjustment.vertical,
-                                                   width: titleLabel.bounds.size.width,
-                                                   height: titleLabel.bounds.size.height)
+//                    titleLabel.frame = CGRect.init(x: (w - titleLabel.bounds.size.width) / 2.0 + titlePositionAdjustment.horizontal,
+//                                                   y: h - titleLabel.bounds.size.height - 1.0 + titlePositionAdjustment.vertical,
+//                                                   width: titleLabel.bounds.size.width,
+//                                                   height: titleLabel.bounds.size.height)
+                    let kH4Lbl = 24.0
+                    let kTopMargin4ImgV = 4.0
+                    titleLabel.frame = CGRect.init(x: 0 + titlePositionAdjustment.horizontal,
+                                                   y: h - kH4Lbl + titlePositionAdjustment.vertical,
+                                                   width: w - 2*titlePositionAdjustment.horizontal,
+                                                   height: kH4Lbl)
+                   
                     imageView.frame = CGRect.init(x: (w - s) / 2.0,
-                                                  y: (h - s) / 2.0 - 6.0,
+                                                  y: (h - kH4Lbl - s) / 2.0 + kTopMargin4ImgV,
                                                   width: s,
                                                   height: s)
                 }
