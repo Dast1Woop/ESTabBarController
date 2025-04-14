@@ -37,6 +37,8 @@ open class ESTabBarItemContentView: UIView {
     
     // MARK: - PROPERTY SETTING
     
+    open var fontScale:CGFloat = 1.0
+    
     /// The title displayed on the item, default is `nil`
     open var title: String? {
         didSet {
@@ -251,7 +253,7 @@ open class ESTabBarItemContentView: UIView {
             }
             
             if !imageView.isHidden && !titleLabel.isHidden {
-                titleLabel.font = UIFont.systemFont(ofSize: f)
+                titleLabel.font = UIFont.systemFont(ofSize: f * self.fontScale)
 //                titleLabel.sizeToFit()
                 if #available(iOS 11.0, *), isWide {
 //                    titleLabel.frame = CGRect.init(x: (w - titleLabel.bounds.size.width) / 2.0 + (UIScreen.main.scale == 3.0 ? 14.25 : 12.25) + titlePositionAdjustment.horizontal,
